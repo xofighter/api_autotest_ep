@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2018-09-16T14:03:58Z" name="Default suite" finished-at="2018-09-16T14:03:58Z" duration-ms="499">
+    <groups>
+    </groups>
+    <test started-at="2018-09-16T14:03:58Z" name="Default test" finished-at="2018-09-16T14:03:58Z" duration-ms="499">
+      <class name="com.ep.api.api_autotest_ep.TestExcelUtil">
+        <test-method signature="f()[pri:0, instance:com.ep.api.api_autotest_ep.TestExcelUtil@7a675056]" started-at="2018-09-16T14:03:58Z" name="f" finished-at="2018-09-16T14:03:58Z" duration-ms="484" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- f -->
+      </class> <!-- com.ep.api.api_autotest_ep.TestExcelUtil -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
