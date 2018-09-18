@@ -9,12 +9,11 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.formula.functions.Rows;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
@@ -25,7 +24,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelUtil {
@@ -69,7 +67,8 @@ public class ExcelUtil {
         is.close();
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
 
         return "共有 " + getSheetCount() + "个sheet 页！";
     }
@@ -705,7 +704,7 @@ public class ExcelUtil {
         		strCell = String.valueOf(cell.getBooleanCellValue());
         		break;
         	case NUMERIC:
-	            if (HSSFDateUtil.isCellDateFormatted(cell)) {
+	            if (DateUtil.isCellDateFormatted(cell)) {
 	                Date date = cell.getDateCellValue();
 	                if (pattern != null) {
 	                    SimpleDateFormat sdf = new SimpleDateFormat(pattern);
@@ -729,7 +728,38 @@ public class ExcelUtil {
         }  
         return strCell;
     }
-    
+    /**
+     * 
+     *@depscription 读取指定sheet 页指定行数据
+     * 
+     * @param sheetIx   指定 sheet 页，从 0 开始
+     * @return 返回map
+     * @throws Exception
+     */    
+	public List<Map<String, Object>> readSheet(int sheetIx) throws Exception {
+		List<Map<String, Object>> lm = new ArrayList<Map<String, Object>>();
+		Sheet sheet = workbook.getSheetAt(sheetIx);
+		// 获得总列数
+		int colcount = sheet.getRow(0).getPhysicalNumberOfCells();
+		// 获得总行数
+		int rowcount = sheet.getLastRowNum();
+		Row names = sheet.getRow(0);
+		for (int i = 1; i <= rowcount; i++) {
+			Map<String, Object> rowmap = new HashMap<String, Object>();
+			Row row = sheet.getRow(i);
+			if (row == null) {
+				for (int j = 0; j < colcount; j++) {
+					rowmap.put(getCellValueToString(names.getCell(j)), "");
+				}
+			} else {
+				for (int j = 0; j < colcount; j++) {
+					rowmap.put(getCellValueToString(names.getCell(j)), getCellValueToString(row.getCell(j)));
+				}	
+			}
+			lm.add(rowmap);
+		}
+		return lm;
+	}
 //    private String getCellValueToString(Cell cell) {
 //    	String val = "";
 //    	SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");

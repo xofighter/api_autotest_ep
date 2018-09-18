@@ -8,9 +8,6 @@ import org.testng.TestListenerAdapter;
 //import seleniumstudy.testcase.BaseTestcase;
 //import seleniumstudy.testcase.InitDriverCase;
 
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
 
 
 public class TestngListener extends TestListenerAdapter {

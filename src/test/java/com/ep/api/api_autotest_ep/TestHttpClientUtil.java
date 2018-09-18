@@ -1,31 +1,48 @@
 package com.ep.api.api_autotest_ep;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 /**
  * @author xu_bob
  */
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.apache.http.Header;
 import org.apache.http.client.HttpClient;
 
-import com.alibaba.fastjson.JSONObject;
+import com.ep.api.utils.ExcelUtil;
 import com.ep.httpclientutil.HttpClientUtil;
 import com.ep.httpclientutil.builder.HCB;
 import com.ep.httpclientutil.common.HttpConfig;
-import com.ep.httpclientutil.common.HttpHeader;
 import com.ep.httpclientutil.common.SSLs.SSLProtocolVersion;
 import com.ep.httpclientutil.exception.HttpProcessException;
 
 public class TestHttpClientUtil {
 
-	public static void main(String[] args) throws HttpProcessException{
+	public static void main(String[] args) throws Exception{
 
-		String url = "http://abc.e-ports.com/apic/searchEPAccounts/";
+		Map<String, Object> map = new HashMap<String, Object>();
+		String url = null;
+		ExcelUtil eu = new ExcelUtil("case/api_testdata 2.xlsx");
+		List<Map<String,Object>> lms = eu.readSheet(0) ;
+		  for (Map<String,Object> mm : lms) { 
+			  for (Map.Entry<String, Object> entry : mm.entrySet()) { 
+				  if("url" == entry.getKey()) {
+					  url =entry.getValue().toString();
+					  System.out.println("url: "+url);
+				  }else if("expectedresult" == entry.getKey()) {
+//					  map = StringTojson(entry.getValue());
+					  System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+				  }
+				  System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue()); 
+			  } 
+		  }
+//		String url = "http://abc.e-ports.com/apic/searchEPAccounts/";
 
 		//最简单的使用：
-		String html = HttpClientUtil.get(HttpConfig.custom().url(url).client(HCB.custom().sslpv(SSLProtocolVersion.TLSv1_2).ssl().build()));
-		System.out.println(html);
+//		String html = HttpClientUtil.get(HttpConfig.custom().url(url).client(HCB.custom().sslpv(SSLProtocolVersion.TLSv1_2).ssl().build()));
+//		System.out.println(html);
 		
 		//---------------------------------
 		//			【详细说明】
@@ -48,15 +65,15 @@ public class TestHttpClientUtil {
 		
 		HttpClient client = hcb.build();
 		
-		Map<String, Object> map2 = new HashMap<String, Object>();
-		map2.put("sortBy", "score");
-		map2.put("page", "1");
-		map2.put("PageSize", "10");
-		map2.put("searchKey", "lovely");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("action", "searchEPAccounts");
-		map.put("request",map2);
-
+//		Map<String, Object> map2 = new HashMap<String, Object>();
+//		map2.put("sortBy", "score");
+//		map2.put("page", "1");
+//		map2.put("PageSize", "10");
+//		map2.put("searchKey", "lovely");
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("action", "searchEPAccounts");
+//		map.put("request",map2);
+		
 		
 //		String str = "{\"action\":\"login\",\"request\":{\"username\":\"xu.bob@e-ports.com\",\"password\":\"password\",\"rememberMe\":false}}";
 //	    JSONObject  jsonObject = JSONObject.parseObject(str);

@@ -181,7 +181,8 @@ public class  HCB extends HttpClientBuilder{
 	public HCB retry(final int tryTimes, final boolean retryWhenInterruptedIO){
 		// 请求重试处理
 	    HttpRequestRetryHandler httpRequestRetryHandler = new HttpRequestRetryHandler() {
-	        public boolean retryRequest(IOException exception, int executionCount, HttpContext context) {
+	        @Override
+			public boolean retryRequest(IOException exception, int executionCount, HttpContext context) {
 	            if (executionCount >= tryTimes) {// 如果已经重试了n次，就放弃
 	                return false;
 	            }

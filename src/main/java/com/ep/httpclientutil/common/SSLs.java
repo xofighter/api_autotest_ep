@@ -50,22 +50,26 @@ public class SSLs {
     private static class SSLHandler implements  X509TrustManager, HostnameVerifier{
 		
 //		@Override
+		@Override
 		public java.security.cert.X509Certificate[] getAcceptedIssuers() {
 			return new java.security.cert.X509Certificate[]{};
 			//return null;
 		}
 		
 //		@Override
+		@Override
 		public void checkServerTrusted(java.security.cert.X509Certificate[] chain,
 				String authType) throws java.security.cert.CertificateException {
 		}
 		
 //		@Override
+		@Override
 		public void checkClientTrusted(java.security.cert.X509Certificate[] chain,
 				String authType) throws java.security.cert.CertificateException {
 		}
 
 //		@Override
+		@Override
 		public boolean verify(String paramString, SSLSession paramSSLSession) {
 			return true;
 		}

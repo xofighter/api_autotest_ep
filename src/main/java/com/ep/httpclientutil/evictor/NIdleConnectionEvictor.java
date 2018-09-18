@@ -34,7 +34,8 @@ public final class NIdleConnectionEvictor {
         this.maxIdleTimeMs = maxIdleTimeUnit != null ? maxIdleTimeUnit.toMillis(maxIdleTime) : maxIdleTime;
         this.thread = this.threadFactory.newThread(new Runnable() {
 //            @Override
-            public void run() {
+            @Override
+			public void run() {
                 try {
                     while (!Thread.currentThread().isInterrupted()) {
                         Thread.sleep(sleepTimeMs);
@@ -107,7 +108,8 @@ public final class NIdleConnectionEvictor {
     static class DefaultThreadFactory implements ThreadFactory {
 
 //        @Override
-        public Thread newThread(final Runnable r) {
+        @Override
+		public Thread newThread(final Runnable r) {
             final Thread t = new Thread(r, "Connection evictor");
             t.setDaemon(true);
             return t;

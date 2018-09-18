@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2018-09-16T14:03:58Z" name="Default suite" finished-at="2018-09-16T14:03:58Z" duration-ms="499">
+  <suite name="Default suite" duration-ms="420" started-at="2018-09-18T07:58:03Z" finished-at="2018-09-18T07:58:04Z">
     <groups>
     </groups>
-    <test started-at="2018-09-16T14:03:58Z" name="Default test" finished-at="2018-09-16T14:03:58Z" duration-ms="499">
-      <class name="com.ep.api.api_autotest_ep.TestExcelUtil">
-        <test-method signature="f()[pri:0, instance:com.ep.api.api_autotest_ep.TestExcelUtil@7a675056]" started-at="2018-09-16T14:03:58Z" name="f" finished-at="2018-09-16T14:03:58Z" duration-ms="484" status="PASS">
+    <test name="Default test" duration-ms="420" started-at="2018-09-18T07:58:03Z" finished-at="2018-09-18T07:58:04Z">
+      <class name="com.ep.api.api_autotest_ep.Test2">
+        <test-method status="PASS" signature="f2()[pri:0, instance:com.ep.api.api_autotest_ep.Test2@59f99ea]" name="f2" duration-ms="405" started-at="2018-09-18T07:58:03Z" finished-at="2018-09-18T07:58:04Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- f -->
-      </class> <!-- com.ep.api.api_autotest_ep.TestExcelUtil -->
+        </test-method> <!-- f2 -->
+      </class> <!-- com.ep.api.api_autotest_ep.Test2 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

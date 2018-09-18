@@ -9,14 +9,25 @@ import org.assertj.core.api.AbstractCharSequenceAssert;
 import org.assertj.core.api.AbstractIntegerAssert;
 import org.assertj.core.api.Assertions;
 
+import static org.assertj.core.api.Assertions.*;
+//import static org.assertj.core.api.AbstractArrayAssert;
+//import static org.assertj.core.api.AbstractAssert;
+//import static org.assertj.core.api.AbstractBigDecimalAssert;
+//import static org.assertj.core.api.AbstractBooleanAssert;
+//import static org.assertj.core.api.AbstractCharSequenceAssert;
+//import static org.assertj.core.api.AbstractIntegerAssert;
+//import static org.assertj.core.api.Assertions;
+
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
+//import com.mongodb.assertions.Assertions;
 
 
 /**
- * assertJ json数据判断增强 eg:不提供提取数组的方法，在断言中作用比较小
+ * @description assertJ json数据判断增强 eg:不提供提取数组的方法，在断言中作用比较小
  * 
- * @author jacksoncina2008
+ *
  *
  */
 public class AssertJSON extends AbstractAssert<AssertJSON, String> {
@@ -65,7 +76,7 @@ public class AssertJSON extends AbstractAssert<AssertJSON, String> {
 
     private JSONObject getJSON(String json) {
         JSONObject j = new JSONObject();
-        j = JSONObject.parseObject(json);
+        j = JSON.parseObject(json);
         return j;
     }
 }
