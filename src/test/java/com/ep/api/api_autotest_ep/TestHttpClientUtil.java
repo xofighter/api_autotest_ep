@@ -11,6 +11,8 @@ import java.util.Map;
 
 import org.apache.http.client.HttpClient;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ep.api.utils.ExcelUtil;
 import com.ep.httpclientutil.HttpClientUtil;
 import com.ep.httpclientutil.builder.HCB;
@@ -20,24 +22,55 @@ import com.ep.httpclientutil.exception.HttpProcessException;
 
 public class TestHttpClientUtil {
 
-	public static void main(String[] args) throws Exception{
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		String url = null;
+
+
+	private static final Map<String, Object> paramsToMap = null;
+
+
+
+
+	public static void main(String[] args) throws Exception {
+
+		String result = null; //响应
+		Map<String, Object> map = new HashMap<String, Object>(); 
+
+		Object urlLink = null;	//url
+		String params = null;	//入参
+		String requestmethod = null;	//请求方式
+		JSONObject paramsToJson = new JSONObject();	//入参转为json格式
+//		Map<String, Object> paramsToMap = null;	//入参转为Map格式
+		
 		ExcelUtil eu = new ExcelUtil("case/api_testdata 2.xlsx");
-		List<Map<String,Object>> lms = eu.readSheet(0) ;
-		  for (Map<String,Object> mm : lms) { 
-			  for (Map.Entry<String, Object> entry : mm.entrySet()) { 
-				  if("url" == entry.getKey()) {
-					  url =entry.getValue().toString();
-					  System.out.println("url: "+url);
-				  }else if("expectedresult" == entry.getKey()) {
-//					  map = StringTojson(entry.getValue());
-					  System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-				  }
-				  System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue()); 
-			  } 
-		  }
+		List<Map<String, Object>> lms = eu.readSheet(0);
+		System.out.println("开始了………………………………………………");
+		System.out.println("lms的长度："+lms.size());
+		for(int i=0; i<lms.size(); i++){
+			for (Map.Entry<String, Object> entry : lms.get(i).entrySet()) {
+				if (entry.getKey().equals("url")) {
+					urlLink = (String) entry.getValue();	
+				} else if (entry.getKey().toString().equals("param")) {
+					params = (String) entry.getValue();	
+				}else if (entry.getKey().equals("method")) {
+					requestmethod = (String)entry.getValue();
+				}
+			}
+		}
+		System.out.println("url: " + urlLink);
+		System.out.println("入参 :  "+ params);
+		System.out.println("请求方式 :  "+ requestmethod);
+		System.out.println("结束了………………………………………………");
+//		System.out.println("字符串解析成json开始了………………………………………………");
+//		JSONObject json = JSONObject.parseObject(params);
+//        System.out.println(JSONObject.toJSONString(json, true));
+//        System.out.println("字符串解析成Json结束！………………………………………………");
+        System.out.println("字符串解析成Map开始了………………………………………………");
+        paramsToMap = (Map)JSON.parse(params);  
+        for (Object map2 : paramsToMap.entrySet()){  
+            System.out.println(((Map.Entry)map2).getKey()+"     " + ((Map.Entry)map2).getValue());  
+        }
+        System.out.println("字符串解析成Map结束！………………………………………………");
+	}
 //		String url = "http://abc.e-ports.com/apic/searchEPAccounts/";
 
 		//最简单的使用：
@@ -64,6 +97,14 @@ public class TestHttpClientUtil {
 											;
 		
 		HttpClient client = hcb.build();
+
+		private String urlLink;
+
+
+
+
+
+
 		
 //		Map<String, Object> map2 = new HashMap<String, Object>();
 //		map2.put("sortBy", "score");
@@ -79,13 +120,13 @@ public class TestHttpClientUtil {
 //	    JSONObject  jsonObject = JSONObject.parseObject(str);
 	    //json对象转Map
 //	    map = (Map<String,Object>)jsonObject;
-		System.out.println("map:"+map);
+//		System.out.println("map:"+map);
 		
 		//插件式配置请求参数（网址、请求参数、编码、client）
 		HttpConfig config = HttpConfig.custom()
 //											.headers(headers)	//设置headers，不需要时则无需设置
-											.url(url)					//设置请求的url
-											.map(map)			//设置请求参数，没有则无需设置
+											.url(urlLink)					//设置请求的url
+											.map(paramsToMap)			//设置请求参数，没有则无需设置
 											.encoding("utf-8") //设置请求和返回编码，默认就是Charset.defaultCharset()
 											.client(client)														//如果只是简单使用，无需设置，会自动获取默认的一个client对象
 											//.inenc("utf-8") 													//设置请求编码，如果请求返回一直，不需要再单独设置
@@ -95,12 +136,16 @@ public class TestHttpClientUtil {
 											//.out(new FileOutputStream("保存地址"))			 	//下载的话，设置这个方法,否则不要设置
 											//.files(new String[]{"d:/1.txt","d:/2.txt"})					//上传的话，传递文件路径，一般还需map配置，设置服务器保存路径
 											;
+
+		
 		
 		
 		//使用方式：
 //		String result1 = HttpClientUtil.get(config);		//get请求
 //		System.out.println("r1:"+result1);
-		String result2 = HttpClientUtil.post(config);	//post请求
+		if(requestmethod.equals("Post")) {
+			result = HttpClientUtil.post(config);	//post请求
+		}
 		System.out.println("r2:"+result2);
 
 	}

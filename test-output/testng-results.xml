@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="420" started-at="2018-09-18T07:58:03Z" finished-at="2018-09-18T07:58:04Z">
+  <suite name="Default suite" duration-ms="481" started-at="2018-09-19T10:03:52Z" finished-at="2018-09-19T10:03:53Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="420" started-at="2018-09-18T07:58:03Z" finished-at="2018-09-18T07:58:04Z">
+    <test name="Default test" duration-ms="481" started-at="2018-09-19T10:03:52Z" finished-at="2018-09-19T10:03:53Z">
       <class name="com.ep.api.api_autotest_ep.Test2">
-        <test-method status="PASS" signature="f2()[pri:0, instance:com.ep.api.api_autotest_ep.Test2@59f99ea]" name="f2" duration-ms="405" started-at="2018-09-18T07:58:03Z" finished-at="2018-09-18T07:58:04Z">
+        <test-method status="PASS" signature="f2()[pri:0, instance:com.ep.api.api_autotest_ep.Test2@59f99ea]" name="f2" duration-ms="465" started-at="2018-09-19T10:03:52Z" finished-at="2018-09-19T10:03:53Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- f2 -->
